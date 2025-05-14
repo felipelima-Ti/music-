@@ -2,88 +2,74 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#aa3df3">
+    <link rel="manifest" href="/music-/manifest.json">
+<meta name="theme-color" content="#aa3df3">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Player Music</title>
     <style>
-        img {
-            margin: 0;
-            padding: 0;
-        }
         body {
-            background-color: #f3befa;
-    margin: 0;
-    padding: 0;
-    margin-top: 10px;
-    margin-left: 70px;
+     background-color: #f3befa;
     font-family: Arial, sans-serif;
     background-image: url('https://i.pinimg.com/originals/be/d2/b0/bed2b0ab397c37afcbcddbf74e6b650f.gif');
-    background-size: cover; /* Ajusta para cobrir toda a tela */
-    background-position: center; /* Centraliza a imagem */
+    background-size: cover;
+    background-position: center;
     background-repeat: no-repeat;
-    color: rgb(48, 47, 47);
-    height: 100vh; /* Usa toda a altura da tela */
-    width: 100vw; /* Usa toda a largura da tela */
-    overflow: hidden; /* Evita rolagem */
+    color: white;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
-        button {
-            background-color: #aa3df3;
-            color: #ffffff;
-            margin: 10px;
-            font-size: 16px;
-            cursor: pointer;
-            border: none;
-            padding: 7px;
-            border-radius: 5px;
-        }
-        #trackImage {
-            margin-right: 100px;
-            width: 200px;
-            height: auto;
-            margin-top: 20px;
-            border-radius: 10px;
-            border: 2px solid #aa3df3;
-        }
-        #musicName {
-            margin-left: 30px;
-        }
-        p {
-            margin: 0;
-            padding: 0;
-            color: white;
-        }
-       
-        .btn-img {
-            
-            width: 30px;
-            height: 30px;
-        }
-        .btn-img2 {
-            width: 28px;
-            height: 28px;
-        }
+
+.player-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+#trackImage {
+    width: 200px;
+    height: auto;
+    border-radius: 10px;
+    border: 2px solid #aa3df3;
+}
+
+.controls {
+    display: flex;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+button {
+    background-color: #aa3df3;
+    color: #ffffff;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    padding: 7px;
+    border-radius: 5px;
+    margin: 10px;
+}
+
+.btn-img {
+    width: 30px;
+    height: 30px;
+}
+
+.btn-img2 {
+    width: 28px;
+    height: 28px;
+}
        
     </style>
 </head>
 <body>
-
-    <script>
-        function abrirPlayer() {
-            const popup = window.open("MusicTheme.html", "Player", "width=500,height=500,scrollbars=no,resizable=no");
-
-            // Se o pop-up for bloqueado, exibir um alerta
-            if (!popup) {
-                alert("Por favor, permita pop-ups para abrir o player.");
-            }
-        }
-
-        window.onload = function () {
-            abrirPlayer();
-            window.resizeTo(370, 400); // Redimensiona a janela automaticamente
-        };
-    </script>
-
+    <div class="player-container">
     <p id="musicName">Super shy New Jeans</p>
     <img id="trackImage" src="https://felipelima-Ti.github.io/music-/newjeans.png" alt="Imagem da música">
     <br>
@@ -104,6 +90,7 @@
         <button onclick="nextTrack()">
             <img class="btn-img" src="https://felipelima-Ti.github.io/music-/h.png" alt="Próxima">
         </button>
+    </div>
     </div>
 
     <script>
@@ -166,11 +153,11 @@
         });
         
     </script>
-    
-    <script>
+
+   <script>
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('sw.js')
+      navigator.serviceWorker.register('/music-/sw.js')
         .then(reg => console.log('Service Worker registrado:', reg))
         .catch(err => console.log('Erro ao registrar Service Worker:', err));
     });
