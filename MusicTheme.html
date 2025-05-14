@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#aa3df3">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player Music</title>
+    <style>
+        img {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background-color: #f3befa;
+    margin: 0;
+    padding: 0;
+    margin-top: 10px;
+    margin-left: 70px;
+    font-family: Arial, sans-serif;
+    background-image: url('https://i.pinimg.com/originals/be/d2/b0/bed2b0ab397c37afcbcddbf74e6b650f.gif');
+    background-size: cover; /* Ajusta para cobrir toda a tela */
+    background-position: center; /* Centraliza a imagem */
+    background-repeat: no-repeat;
+    color: rgb(48, 47, 47);
+    height: 100vh; /* Usa toda a altura da tela */
+    width: 100vw; /* Usa toda a largura da tela */
+    overflow: hidden; /* Evita rolagem */
+}
+        button {
+            background-color: #aa3df3;
+            color: #ffffff;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            padding: 7px;
+            border-radius: 5px;
+        }
+        #trackImage {
+            margin-right: 100px;
+            width: 200px;
+            height: auto;
+            margin-top: 20px;
+            border-radius: 10px;
+            border: 2px solid #aa3df3;
+        }
+        #musicName {
+            margin-left: 30px;
+        }
+        p {
+            margin: 0;
+            padding: 0;
+            color: white;
+        }
+       
+        .btn-img {
+            
+            width: 30px;
+            height: 30px;
+        }
+        .btn-img2 {
+            width: 28px;
+            height: 28px;
+        }
+       
+    </style>
+</head>
+<body>
+
+    <script>
+        function abrirPlayer() {
+            const popup = window.open("MusicTheme.html", "Player", "width=500,height=500,scrollbars=no,resizable=no");
+
+            // Se o pop-up for bloqueado, exibir um alerta
+            if (!popup) {
+                alert("Por favor, permita pop-ups para abrir o player.");
+            }
+        }
+
+        window.onload = function () {
+            abrirPlayer();
+            window.resizeTo(370, 400); // Redimensiona a janela automaticamente
+        };
+    </script>
+
+    <p id="musicName">Super shy New Jeans</p>
+    <img id="trackImage" src="https://felipelima-Ti.github.io/music-/newjeans.png" alt="Imagem da música">
+    <br>
+    <audio id="audioPlayer">
+        <source id="audioSource" src="https://felipelima-Ti.github.io/music-/newjeans.mp3" type="audio/mpeg">
+        Seu navegador não suporta o elemento de áudio.
+    </audio>
+   
+    <div>
+        <button class="botao" onclick="previousTrack()">
+            <img class="btn-img" src="https://felipelima-Ti.github.io/music-/h2.png" alt="Anterior">
+        </button>
+        
+        <button class="botao" onclick="togglePlayPause()" id="playPauseBtn">
+            <img id="playPauseIcon" class="btn-img2" src="https://felipelima-Ti.github.io/music-/aff.png" alt="Play/Pause">
+        </button>
+        
+        <button onclick="nextTrack()">
+            <img class="btn-img" src="https://felipelima-Ti.github.io/music-/h.png" alt="Próxima">
+        </button>
+    </div>
+
+    <script>
+        const tracks = [
+            { p: 'Super shy New Jeans', src: 'https://felipelima-Ti.github.io/music-/newjeans.mp3', img: 'https://felipelima-Ti.github.io/music-/newjeans.png' },
+            { p: 'TWICE _ LIKEY', src: 'https://felipelima-Ti.github.io/music-/TWICE _ LIKEY.mp3', img: 'https://felipelima-Ti.github.io/music-/TWICE_LIKEY.png' },
+            { p: 'Twice _ TT', src: 'https://felipelima-Ti.github.io/music-/TWICE-TT.mp3', img: 'https://felipelima-Ti.github.io/music-/TWICE-TT.png' },
+            { p: 'Red velvet Cosmic', src: 'https://felipelima-Ti.github.io/music-/Red Velvet -Cosmic.mp3', img: 'https://felipelima-Ti.github.io/music-/COSMIC.png' },
+            { p: 'NewJeans-Cookie', src: 'https://felipelima-Ti.github.io/music-/NewJeans-Cookie.mp3', img: 'https://felipelima-Ti.github.io/music-/ase.png' },
+            { p: 'ILLIT-MAGNETIC', src: 'https://felipelima-ti.github.io/music-/ILLIT-Magnetic.mp3', img: 'https://felipelima-ti.github.io/music-/ILLIT-MAGNETIC.png' },
+            { p: 'Red velved bad boy', src: 'https://felipelima-ti.github.io/music-/Red Velvet - Bad Boy (Audio).mp3', img: 'https://felipelima-ti.github.io/music-/red velvet-badboy.png' },
+            { p: 'AOA-Miniskirt', src: 'https://felipelima-Ti.github.io/music-/AOA-Miniskirt.mp3', img: 'https://felipelima-Ti.github.io/music-/AOA.png' },
+            { p: 'XG-SHOOTING STARS', src: 'https://felipelima-Ti.github.io/music-/XG - SHOOTING.mp3', img: 'https://felipelima-Ti.github.io/music-/xg.png' },
+            { p: 'EVERGLOW LA DI DA', src: 'https://felipelima-ti.github.io/music-/EVERGLOW-LA DI DA.mp3', img: 'https://felipelima-ti.github.io/music-/ladida.png' },
+            { p: 'BLACKPINK-Love To Hate Me ', src: 'https://felipelima-ti.github.io/music-/BLACKPINK-Love To Hate Me.mp3', img: 'https://felipelima-ti.github.io/music-/love me hate.png' },
+            { p: 'UP-Karina solo', src: 'https://felipelima-ti.github.io/music-/UP-KARINA.mp3', img: 'https://felipelima-ti.github.io/music-/UP-karina.png' },
+            { p: ' G-IDLE queen card', src: 'https://felipelima-ti.github.io/music-/I-DLE-Queencard.mp3', img: 'https://felipelima-ti.github.io/music-/queencard.png' },
+            { p: 'YA LEE MINHYUK', src: 'https://felipelima-Ti.github.io/music-/uta.mp3', img: 'https://felipelima-Ti.github.io/music-/tokyo.png' },
+            { p: 'Ballroom DPR Ian', src: 'https://felipelima-Ti.github.io/music-/Ballroom.mp3', img: 'https://felipelima-Ti.github.io/music-/ballroom.png' },
+
+        ];
+
+        let currentTrack = 0;
+        const audioPlayer = document.getElementById('audioPlayer');
+        const trackImage = document.getElementById('trackImage');
+        const musicName = document.getElementById('musicName');
+        const playPauseIcon = document.getElementById('playPauseIcon');
+
+        function togglePlayPause() {
+            if (audioPlayer.paused) {
+                audioPlayer.play();
+                playPauseIcon.src = 'https://felipelima-Ti.github.io/music-/aff.png'; 
+            } else {
+                audioPlayer.pause();
+                playPauseIcon.src = 'https://felipelima-Ti.github.io/music-/aff.png'; 
+            }
+        }
+
+        function nextTrack() {
+            currentTrack = (currentTrack + 1) % tracks.length;
+            updateTrack();
+        }
+
+        function previousTrack() {
+            currentTrack = (currentTrack - 1 + tracks.length) % tracks.length;
+            updateTrack();
+        }
+
+        function updateTrack() {
+            audioPlayer.src = tracks[currentTrack].src;
+            trackImage.src = tracks[currentTrack].img;
+            musicName.textContent = tracks[currentTrack].p;
+            audioPlayer.load();
+            audioPlayer.play();
+            playPauseIcon.src = 'https://felipelima-Ti.github.io/music-/aff.png'; 
+        }
+
+        audioPlayer.addEventListener('ended', function () {
+            nextTrack();
+        });
+        
+    </script>
+    
+    <script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js')
+        .then(reg => console.log('Service Worker registrado:', reg))
+        .catch(err => console.log('Erro ao registrar Service Worker:', err));
+    });
+  }
+</script>
+
+</body>
+</html>
